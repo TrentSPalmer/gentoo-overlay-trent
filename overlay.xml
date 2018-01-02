@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>gentoo-overlay-trent</name>
+    <description>ebuild practice</description>
+    <homepage></homepage>
+    <owner>
+      <email></email>
+      <name>Trent Palmer</name>
+      <name>TrentSPalmer</name>
+    </owner>
+    <source type="git">https://github.com/TrentSPalmer/gentoo-overlay-trent.git</source>
+  </repo>
+</repositories>
