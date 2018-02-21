@@ -20,8 +20,12 @@ RDEPEND="${DEPEND}
 ZSH_DEST="/usr/share/zsh/site-contrib/${PN}"
 DISABLE_AUTOFORMATTING="true"
 
-DOC_CONTENTS="In order to use ${CATEGORY}/${PN} add to your ~/.zshrc
-source '${ZSH_DEST}/zsh-history-substring-search.zsh'"
+DOC_CONTENTS="     ********************************
+In order to use ${CATEGORY}/${PN} add to your ~/.zshrc
+source '${ZSH_DEST}/zsh-history-substring-search.zsh'
+************** and also add hotkeys ***************
+bindkey '\\\eOA' history-substring-search-up
+bindkey '\\\eOB' history-substring-search-up"
 
 src_install() {
 	insinto "${ZSH_DEST}"
