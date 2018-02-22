@@ -11,7 +11,7 @@ SRC_URI="https://github.com/zsh-users/zsh-history-substring-search/archive/v${PV
 LICENSE=BSD
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="+doc"
 
 DEPEND=""
 RDEPEND="${DEPEND}
@@ -27,13 +27,15 @@ source '${ZSH_DEST}/zsh-history-substring-search.zsh'
 bindkey '\\\eOA' history-substring-search-up
 bindkey '\\\eOB' history-substring-search-up"
 
+
 src_install() {
+	use doc || rm ${S}/README.md
 	insinto "${ZSH_DEST}"
 	doins -r *
-	readme.gentoo_create_doc
+	use doc && readme.gentoo_create_doc
 }
 
 pkg_postinst() {
-	readme.gentoo_print_elog
+	use doc && readme.gentoo_print_elog
 	elog "${DOC_CONTENTS}"
 }
