@@ -10,9 +10,9 @@ SRC_URI="https://deb.grml.org/pool/main/g/grml-etc-core/grml-etc-core_${PV}.tar.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="+doc"
 
-DEPEND="app-text/txt2tags"
+DEPEND="doc? ( app-text/txt2tags )"
 RDEPEND="${DEPEND}
          app-shells/zsh
 		 sys-process/procps
@@ -28,12 +28,12 @@ src_unpack() {
 
 src_compile() {
 	cd ${S}/doc
-	make
+	use doc && make
 }
 
 src_install() {
 	install -D -m644 ${S}/etc/skel/.zshrc ${D}/etc/skel/.zshrc
 	install -D -m644 ${S}/etc/zsh/keephack ${D}/etc/zsh/keephack
 	install -D -m644 ${S}/etc/zsh/zshrc ${D}/etc/zsh/zshrc
-	install -D -m644 ${S}/doc/grmlzshrc.5 ${D}/usr/share/man/man5/grmlzshrc.5
+	use doc && install -D -m644 ${S}/doc/grmlzshrc.5 ${D}/usr/share/man/man5/grmlzshrc.5
 }
