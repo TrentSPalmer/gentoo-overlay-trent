@@ -23,7 +23,7 @@ COMMON_DEPEND="
 	clang? ( >=sys-devel/clang-3.8:= )
 	mono? ( dev-lang/mono )
 	go?   ( dev-lang/go )
-	rust? ( dev-lang/rust 
+	rust? ( dev-lang/rust
 	        app-vim/rust-vim
 	)
 	nodejs? ( net-libs/nodejs )
@@ -70,7 +70,7 @@ src_prepare() {
 		rm -r "${S}"/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
 	# Argparse is included in python 2.7
-	for third_party_module in argparse bottle python-future requests waitress; do
+	for third_party_module in bottle python-future requests waitress; do
 		rm -r "${S}"/third_party/ycmd/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
 	rm -r "${S}"/third_party/ycmd/third_party/JediHTTP/vendor || die "Failed to remove third_party/ycmd/third_party/JediHTTP/vendor"
@@ -91,7 +91,7 @@ src_configure() {
 src_compile() {
 	cmake-utils_src_compile
 
-	if use rust; 
+	if use rust;
 	then
 		cd "${S}"/third_party/ycmd/third_party/racerd || die "no dir third_party/racerd"
 		cargo build --release || die "cargo build failed"
@@ -99,7 +99,7 @@ src_compile() {
 
 	if use mono;
 	then
-		cd "${S}/third_party/ycmd/third_party/OmniSharpServer" || die "failed cd to OmniSharpServer" 
+		cd "${S}/third_party/ycmd/third_party/OmniSharpServer" || die "failed cd to OmniSharpServer"
 		xbuild /property:Configuration=Release || die "xbuild command failed"
 	fi
 
