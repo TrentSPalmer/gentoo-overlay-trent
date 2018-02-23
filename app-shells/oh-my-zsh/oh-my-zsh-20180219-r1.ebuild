@@ -1,20 +1,20 @@
-# Copyright 2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 EGIT_REPO_URI="https://github.com/robbyrussell/${PN}.git"
-EGIT_COMMIT="c3b072eace1ce19a48e36c2ead5932ae2d2e06d9"
+EGIT_COMMIT="37c2d0ddd751e15d0c87a51e2d9f9849093571dc"
 inherit git-r3 readme.gentoo-r1
 
 DESCRIPTION="A ready-to-use zsh configuration with plugins"
 HOMEPAGE="https://github.com/robbyrussell/oh-my-zsh"
 SRC_URI=""
 
-LICENSE="ZSH"
+LICENSE=MIT
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE=""
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+IUSE="+doc"
 PROPERTIES="live"
 
 RDEPEND="app-shells/zsh"
@@ -51,10 +51,17 @@ src_prepare() {
 src_install() {
 	insinto "${ZSH_DEST}"
 	doins -r *
-	readme.gentoo_create_doc
+	use doc && readme.gentoo_create_doc
+	use doc && dodoc CONTRIBUTING.md LICENSE.txt README.md
+	cd "${D}"
+	use doc || find -name README.md -exec rm -rf {} +
+	use doc || find -name README -exec rm -rf {} +
+	use doc || find -name README.txt -exec rm -rf {} +
+	use doc || find -name CONTRIBUTING.md -exec rm -rf {} +
+	use doc || find -name .git* -exec rm -rf {} +
 }
 
 pkg_postinst() {
-	readme.gentoo_print_elog
+	use doc && readme.gentoo_print_elog
 	elog "${DOC_CONTENTS}"
 }
