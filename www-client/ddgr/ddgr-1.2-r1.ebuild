@@ -17,7 +17,6 @@ DEPEND=""
 # RDEPEND="${DEPEND}"
 RDEPEND="dev-lang/python"
 
-
 DISABLE_AUTOFORMATTING="true"
 DOC_CONTENTS="     ********************************
 All configuration is from the environment, so i.e.
@@ -28,11 +27,11 @@ man page requires USE="doc"
 *************************************************"
 
 src_install() {
-	install -Dm755 ${S}/ddgr "${D}/usr/bin/ddgr"
-	use doc && install -Dm644 ${S}/ddgr.1 "${D}/usr/share/man/man1/ddgr.1"
-	install -Dm644 ${S}/auto-completion/fish/ddgr.fish "${D}/usr/share/fish/vendor_completions.d/ddgr.fish"
-	install -Dm644 ${S}/auto-completion/bash/ddgr-completion.bash "${D}/usr/share/bash-completion/completions/ddgr"
-	install -Dm644 ${S}/auto-completion/zsh/_ddgr "${D}/usr/share/zsh/site-functions/_ddgr"
+	install -Dm755 "${S}/ddgr" "${D}/usr/bin/ddgr"
+	use doc && install -Dm644 "${S}/ddgr.1" "${D}/usr/share/man/man1/ddgr.1"
+	install -Dm644 "${S}/auto-completion/fish/ddgr.fish" "${D}/usr/share/fish/vendor_completions.d/ddgr.fish"
+	install -Dm644 "${S}/auto-completion/bash/ddgr-completion.bash" "${D}/usr/share/bash-completion/completions/ddgr"
+	install -Dm644 "${S}/auto-completion/zsh/_ddgr" "${D}/usr/share/zsh/site-functions/_ddgr"
 	use doc && readme.gentoo_create_doc
 	use doc && dodoc CHANGELOG LICENSE README.md
 }
