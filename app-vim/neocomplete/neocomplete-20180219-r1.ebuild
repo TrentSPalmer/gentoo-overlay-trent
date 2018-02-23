@@ -5,17 +5,17 @@ EAPI=6
 
 inherit vim-plugin git-r3
 
-
 DESCRIPTION="vim plugin: Next generation completion framework after neocomplcache"
 HOMEPAGE="https://github.com/Shougo/neocomplete.vim"
 EGIT_REPO_URI="https://github.com/Shougo/neocomplete.vim.git"
-EGIT_COMMIT="46791e7692e07384a089d125c5c536246698d04c"
+EGIT_COMMIT="1401a1c6ab56546c55804ba09e6c9fe87654e954"
 SRC_URI=""
 KEYWORDS="~amd64 ~x86"
+PROPERTIES="live"
 
 LICENSE="MIT"
 
-IUSE=""
+IUSE="+doc"
 
 RDEPEND="|| (
 >app-editors/vim-7.3.885[lua]
@@ -34,4 +34,5 @@ src_prepare() {
 src_install() {
 	egit_clean
 	vim-plugin_src_install
+	use doc || rm -rf "${D}/usr/share/doc"
 }
