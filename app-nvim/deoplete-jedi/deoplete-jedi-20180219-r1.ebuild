@@ -12,9 +12,10 @@ EGIT_COMMIT="f7a0c4ffc53c16a931f761819240f60eafec9604"
 SRC_URI=""
 KEYWORDS="~amd64 ~x86"
 
+PROPERTIES="live"
 LICENSE="MIT"
 SLOT="0"
-IUSE=""
+IUSE="+doc"
 
 DEPEND=""
 RDEPEND="app-nvim/deoplete
@@ -27,5 +28,13 @@ src_compile() {
 src_install() {
 	insinto /usr/share/nvim/runtime
 	doins -r rplugin
-	dodoc README.md LICENSE
+	use doc && dodoc README.md
+	find "${D}" -name ".git*" -exec rm -rf {} +
+	find "${D}" -name .travis.yml -exec rm -rf {} +
+	use doc || find "${D}" -name LICENSE.txt -exec rm -rf {} +
+	use doc || find "${D}" -name README.rst -exec rm -rf {} +
+	use doc || find "${D}" -name AUTHORS.txt -exec rm -rf {} +
+	use doc || find "${D}" -name README.md -exec rm -rf {} +
+	use doc || find "${D}" -name CHANGELOG.rst -exec rm -rf {} +
+	use doc || find "${D}" -name CONTRIBUTING.md -exec rm -rf {} +
 }
