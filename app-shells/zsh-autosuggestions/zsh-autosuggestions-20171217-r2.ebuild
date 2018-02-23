@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -26,7 +26,6 @@ DOC_CONTENTS="In order to use ${CATEGORY}/${PN} add to your ~/.zshrc
 source '${ZSH_DEST}/zsh-autosuggestions.zsh'"
 
 src_compile() {
-	cd ${S}
 	make -B zsh-autosuggestions.zsh
 }
 
