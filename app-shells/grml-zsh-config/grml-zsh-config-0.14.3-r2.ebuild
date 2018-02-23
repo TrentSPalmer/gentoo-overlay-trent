@@ -14,11 +14,11 @@ IUSE="+doc"
 
 DEPEND="doc? ( app-text/txt2tags )"
 RDEPEND="${DEPEND}
-         app-shells/zsh
-		 sys-process/procps
-		 sys-apps/grep
-		 sys-apps/coreutils
-		 sys-apps/sed"
+		app-shells/zsh
+		sys-process/procps
+		sys-apps/grep
+		sys-apps/coreutils
+		sys-apps/sed"
 
 src_unpack() {
 	unpack ${A}
@@ -27,13 +27,13 @@ src_unpack() {
 }
 
 src_compile() {
-	cd ${S}/doc
+	cd "${S}/doc"
 	use doc && make
 }
 
 src_install() {
-	install -D -m644 ${S}/etc/skel/.zshrc ${D}/etc/skel/.zshrc
-	install -D -m644 ${S}/etc/zsh/keephack ${D}/etc/zsh/keephack
-	install -D -m644 ${S}/etc/zsh/zshrc ${D}/etc/zsh/zshrc
-	use doc && install -D -m644 ${S}/doc/grmlzshrc.5 ${D}/usr/share/man/man5/grmlzshrc.5
+	install -D -m644 "${S}/etc/skel/.zshrc" "${D}/etc/skel/.zshrc"
+	install -D -m644 "${S}/etc/zsh/keephack" "${D}/etc/zsh/keephack"
+	install -D -m644 "${S}/etc/zsh/zshrc" "${D}/etc/zsh/zshrc"
+	use doc && install -D -m644 "${S}/doc/grmlzshrc.5" "${D}/usr/share/man/man5/grmlzshrc.5"
 }
