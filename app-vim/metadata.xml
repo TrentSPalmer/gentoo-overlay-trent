@@ -4,8 +4,4 @@
 	<maintainer type="person">
 		<email>trenttdually@gmail.com</email>
 	</maintainer>
-	<use>
-		<flag name="vim">Enable use with vim</flag>
-		<flag name="neovim">Enable use with neovim</flag>
-	</use>
 </pkgmetadata>
