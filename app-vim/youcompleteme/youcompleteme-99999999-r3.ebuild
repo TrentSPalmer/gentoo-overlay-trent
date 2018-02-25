@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clang doc test mono go rust nodejs"
+IUSE="clang +doc test mono go rust nodejs"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="
@@ -61,7 +61,6 @@ VIM_PLUGIN_HELPFILES="${PN}"
 
 src_prepare() {
 	default
-
 
 	if ! use test ; then
 		sed -i '/^add_subdirectory( tests )/d' third_party/ycmd/cpp/ycm/CMakeLists.txt || die
@@ -134,7 +133,6 @@ src_test() {
 
 src_install() {
 
-
 	if use rust;
 	then
 		cd "${S}/third_party/ycmd/third_party/racerd" || die "racerd target wasn't built"
@@ -186,6 +184,18 @@ src_install() {
 	use clang && (rm third_party/ycmd/libclang.so* || die)
 
 	vim-plugin_src_install
+
+	use mono || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/OmniSharpServer"
+	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/racerd"
+	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/rust"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/gocode"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/godef"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/go"
+	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
+	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
+	find "${D}" -name .gitignore -exec rm -rf {} + || die
+	find "${D}" -name .travis.yml -exec rm -rf {} + || die
+	find "${D}" -name README.rst -exec rm -rf {} + || die
 
 	python_optimize "${ED}"
 	python_fix_shebang "${ED}"

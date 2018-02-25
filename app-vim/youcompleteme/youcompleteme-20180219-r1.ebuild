@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,7 +16,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clang doc test mono go rust nodejs"
+IUSE="clang +doc test mono go rust nodejs"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="
@@ -24,7 +24,7 @@ COMMON_DEPEND="
 	clang? ( >=sys-devel/clang-3.8:= )
 	mono? ( dev-lang/mono )
 	go?   ( dev-lang/go )
-	rust? ( dev-lang/rust 
+	rust? ( dev-lang/rust
 	        app-vim/rust-vim
 	)
 	nodejs? ( net-libs/nodejs )
@@ -63,7 +63,6 @@ VIM_PLUGIN_HELPFILES="${PN}"
 src_prepare() {
 	default
 
-
 	if ! use test ; then
 		sed -i '/^add_subdirectory( tests )/d' third_party/ycmd/cpp/ycm/CMakeLists.txt || die
 	fi
@@ -92,7 +91,7 @@ src_configure() {
 src_compile() {
 	cmake-utils_src_compile
 
-	if use rust; 
+	if use rust;
 	then
 		cd "${S}"/third_party/ycmd/third_party/racerd || die "no dir third_party/racerd"
 		cargo build --release || die "cargo build failed"
@@ -100,7 +99,7 @@ src_compile() {
 
 	if use mono;
 	then
-		cd "${S}/third_party/ycmd/third_party/OmniSharpServer" || die "failed cd to OmniSharpServer" 
+		cd "${S}/third_party/ycmd/third_party/OmniSharpServer" || die "failed cd to OmniSharpServer"
 		xbuild /property:Configuration=Release || die "xbuild command failed"
 	fi
 
@@ -134,7 +133,6 @@ src_test() {
 }
 
 src_install() {
-
 
 	if use rust;
 	then
@@ -187,6 +185,18 @@ src_install() {
 	use clang && (rm third_party/ycmd/libclang.so* || die)
 
 	vim-plugin_src_install
+
+	use mono || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/OmniSharpServer"
+	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/racerd"
+	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/rust"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/gocode"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/godef"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/go"
+	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
+	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
+	find "${D}" -name .gitignore -exec rm -rf {} + || die
+	find "${D}" -name .travis.yml -exec rm -rf {} + || die
+	find "${D}" -name README.rst -exec rm -rf {} + || die
 
 	python_optimize "${ED}"
 	python_fix_shebang "${ED}"
