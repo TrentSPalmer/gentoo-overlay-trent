@@ -5,7 +5,7 @@ EAPI=6
 
 inherit eutils git-r3 readme.gentoo-r1
 
-DESCRIPTION="Fish shell like fast/unobtrusive autosuggestions for zsh"
+DESCRIPTION="Fish shell-like syntax highlighting for Zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-syntax-highlighting"
 SRC_URI=""
 EGIT_REPO_URI="${HOMEPAGE}"

@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,12 +9,13 @@ DESCRIPTION="Fish shell-like syntax highlighting for Zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-syntax-highlighting"
 SRC_URI=""
 EGIT_REPO_URI="${HOMEPAGE}"
-EGIT_COMMIT="b07ada1255b74c25fbc96901f2b77dc4bd81de1a"
+EGIT_COMMIT="db6cac391bee957c20ff3175b2f03c4817253e60"
+PROPERTIES="live"
 
 LICENSE="HPND"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="+doc"
 
 DEPEND="app-shells/zsh"
 RDEPEND="${DEPEND}"
@@ -36,10 +37,12 @@ src_compile() {
 
 src_install() {
 	emake "${MAKE_ARGS[@]}" install
-	readme.gentoo_create_doc
+	use doc && dodoc changelog.md COPYING.md HACKING.md INSTALL.md README.md release.md
+	use doc && readme.gentoo_create_doc
+	use doc || rm -rf "${D}/usr/share/doc"
 }
 
 pkg_postinst() {
-	readme.gentoo_print_elog
+	use doc && readme.gentoo_print_elog
 	elog "${DOC_CONTENTS}"
 }
