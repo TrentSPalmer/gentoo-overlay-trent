@@ -34,8 +34,6 @@ src_prepare() {
 }
 
 src_install() {
-	insinto /usr/share/nvim/runtime
-	use neovim && doins -r plugin
 	use vim && vim-plugin_src_install
 	use doc || rm -rf "${D}/usr/share/doc"
 }
