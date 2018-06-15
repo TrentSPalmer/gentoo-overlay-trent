@@ -4,4 +4,8 @@
 	<maintainer type="person">
 		<email>trenttdually@gmail.com</email>
 	</maintainer>
+	<use>
+		<flag name="nvim">Enable support for neovim using <pkg>app-editors/neovim</pkg></flag>
+		<flag name="vim">Enable support for vim using <pkg>app-editors/vim</pkg></flag>
+	</use>
 </pkgmetadata>

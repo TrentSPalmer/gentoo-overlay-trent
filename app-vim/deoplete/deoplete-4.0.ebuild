@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,10 +12,24 @@ SRC_URI="https://github.com/Shougo/deoplete.nvim/archive/${PV}-serial.tar.gz -> 
 KEYWORDS="~amd64 ~x86"
 LICENSE="MIT"
 SLOT="0"
-IUSE="+doc"
+IUSE="+doc +vim +nvim"
+REQUIRED_USE="
+	|| (
+	vim
+	nvim
+	)
+"
 
 DEPEND=""
-RDEPEND="app-editors/neovim[python]"
+RDEPEND="
+	vim? (
+	app-editors/vim[python]
+	app-vim/vim-hug-neovim-rpc
+	)
+	nvim? (
+	app-editors/neovim[python]
+	)
+"
 
 src_compile() {
 	true
