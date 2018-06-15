@@ -32,6 +32,12 @@ RDEPEND="
 	)
 "
 
+src_unpack() {
+	unpack ${A}
+	cd "${WORKDIR}"
+	mv deoplete.nvim-${PV}-serial "${P}"
+}
+
 src_compile() {
 	true
 }
