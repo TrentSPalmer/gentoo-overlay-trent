@@ -25,6 +25,7 @@ RDEPEND="
 	vim? (
 	app-editors/vim[python]
 	app-vim/vim-hug-neovim-rpc
+	app-vim/nvim-yarp
 	)
 	nvim? (
 	app-editors/neovim[python]
