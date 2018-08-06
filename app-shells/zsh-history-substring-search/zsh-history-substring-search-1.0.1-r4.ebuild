@@ -25,7 +25,7 @@ In order to use ${CATEGORY}/${PN} add to your ~/.zshrc
 source '${ZSH_DEST}/zsh-history-substring-search.zsh'
 ************** and also add hotkeys ***************
 bindkey '\\\eOA' history-substring-search-up
-bindkey '\\\eOB' history-substring-search-up"
+bindkey '\\\eOB' history-substring-search-down"
 
 src_install() {
 	use doc || rm "${S}/README.md"
