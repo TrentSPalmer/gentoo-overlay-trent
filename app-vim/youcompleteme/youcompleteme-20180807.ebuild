@@ -10,6 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://valloric.github.io/YouCompleteMe/"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe.git"
+EGIT_COMMIT="15362d9cb8ec054c929e9a202252825eabe47e58"
 SRC_URI=""
 
 LICENSE="GPL-3"
@@ -38,7 +39,6 @@ RDEPEND="
 	${COMMON_DEPEND}
 	dev-python/bottle[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/jedi[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/sh[${PYTHON_USEDEP}]
 	dev-python/waitress[${PYTHON_USEDEP}]
@@ -72,7 +72,6 @@ src_prepare() {
 	for third_party_module in bottle python-future requests waitress; do
 		rm -r "${S}"/third_party/ycmd/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
-	rm -r "${S}"/third_party/ycmd/third_party/JediHTTP/vendor || die "Failed to remove third_party/ycmd/third_party/JediHTTP/vendor"
 	rm -r "${S}"/third_party/ycmd/cpp/BoostParts || die "Failed to remove bundled boost"
 
 }
@@ -180,6 +179,7 @@ src_install() {
 	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt ci third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
 	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
+	find third_party/ycmd/third_party -name test -exec rm -rf {} + || die
 	egit_clean
 	use clang && (rm third_party/ycmd/libclang.so* || die)
 

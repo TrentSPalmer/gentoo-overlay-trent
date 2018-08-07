@@ -10,13 +10,12 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://valloric.github.io/YouCompleteMe/"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe.git"
-EGIT_COMMIT="290dd94721d1bc97fab4f2e975a0cf6258abfbac"
 SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clang doc test mono go rust nodejs"
+IUSE="clang +doc test mono go rust nodejs"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="
@@ -39,7 +38,6 @@ RDEPEND="
 	${COMMON_DEPEND}
 	dev-python/bottle[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/jedi[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/sh[${PYTHON_USEDEP}]
 	dev-python/waitress[${PYTHON_USEDEP}]
@@ -70,10 +68,9 @@ src_prepare() {
 		rm -r "${S}"/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
 	# Argparse is included in python 2.7
-	for third_party_module in argparse bottle python-future requests waitress; do
+	for third_party_module in bottle python-future requests waitress; do
 		rm -r "${S}"/third_party/ycmd/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
 	done
-	rm -r "${S}"/third_party/ycmd/third_party/JediHTTP/vendor || die "Failed to remove third_party/ycmd/third_party/JediHTTP/vendor"
 	rm -r "${S}"/third_party/ycmd/cpp/BoostParts || die "Failed to remove bundled boost"
 
 }
@@ -179,12 +176,25 @@ src_install() {
 	cd "${S}"
 	use doc && dodoc *.md third_party/ycmd/*.md
 	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt ci third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
-	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*,Vagrantfile} || die
+	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
+	find third_party/ycmd/third_party -name test -exec rm -rf {} + || die
 	egit_clean
 	use clang && (rm third_party/ycmd/libclang.so* || die)
 
 	vim-plugin_src_install
+
+	use mono || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/OmniSharpServer"
+	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/racerd"
+	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/rust"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/gocode"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/godef"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/go"
+	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
+	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
+	find "${D}" -name .gitignore -exec rm -rf {} + || die
+	find "${D}" -name .travis.yml -exec rm -rf {} + || die
+	find "${D}" -name README.rst -exec rm -rf {} + || die
 
 	python_optimize "${ED}"
 	python_fix_shebang "${ED}"
