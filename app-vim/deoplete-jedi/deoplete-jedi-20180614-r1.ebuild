@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/zchee/deoplete-jedi"
 EGIT_REPO_URI="https://github.com/zchee/deoplete-jedi.git"
 EGIT_COMMIT="f7a0c4ffc53c16a931f761819240f60eafec9604"
 SRC_URI=""
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~arm"
 
 PROPERTIES="live"
 LICENSE="MIT"
