@@ -9,7 +9,7 @@ DESCRIPTION="Dark powered asynchronous completion framework for neovim"
 HOMEPAGE="https://github.com/Shougo/deoplete.nvim"
 SRC_URI="https://github.com/Shougo/deoplete.nvim/archive/${PV}-serial.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~arm"
 LICENSE="MIT"
 SLOT="0"
 IUSE="+doc +vim +nvim"
