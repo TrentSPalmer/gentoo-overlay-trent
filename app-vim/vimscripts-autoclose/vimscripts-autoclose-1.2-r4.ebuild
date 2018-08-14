@@ -11,7 +11,7 @@ SRC_URI="https://github.com/vim-scripts/AutoClose/archive/${PV}.tar.gz -> ${P}.t
 
 # unknown license, actually
 LICENSE="vim"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~arm"
 
 # to enable invented use flags vim and neovim,
 # they are described in metadata.xml
