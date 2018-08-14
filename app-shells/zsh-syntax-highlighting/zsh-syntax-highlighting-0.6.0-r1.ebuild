@@ -3,18 +3,15 @@
 
 EAPI=6
 
-inherit eutils git-r3 readme.gentoo-r1
+inherit eutils readme.gentoo-r1
 
 DESCRIPTION="Fish shell-like syntax highlighting for Zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-syntax-highlighting"
-SRC_URI=""
-EGIT_REPO_URI="${HOMEPAGE}"
-EGIT_COMMIT="db6cac391bee957c20ff3175b2f03c4817253e60"
-PROPERTIES="live"
+SRC_URI="https://github.com/zsh-users/zsh-syntax-highlighting/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="HPND"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm"
 IUSE="+doc"
 
 DEPEND="app-shells/zsh"
