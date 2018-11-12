@@ -7,7 +7,7 @@ inherit vim-plugin
 
 DESCRIPTION="Dark powered asynchronous completion framework for neovim"
 HOMEPAGE="https://github.com/Shougo/deoplete.nvim"
-SRC_URI="https://github.com/Shougo/deoplete.nvim/archive/${PV}-serial.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/Shougo/deoplete.nvim/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86 ~arm"
 LICENSE="MIT"
@@ -35,7 +35,7 @@ RDEPEND="
 src_unpack() {
 	unpack ${A}
 	cd "${WORKDIR}"
-	mv deoplete.nvim-${PV}-serial "${P}"
+	mv deoplete.nvim-${PV} "${P}"
 }
 
 src_compile() {
