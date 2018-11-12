@@ -9,13 +9,13 @@ inherit vim-plugin git-r3
 DESCRIPTION="vim plugin: vim-hug-neovim-rpc"
 HOMEPAGE="https://github.com/roxma/vim-hug-neovim-rpc"
 EGIT_REPO_URI="https://github.com/roxma/vim-hug-neovim-rpc"
-EGIT_COMMIT="9a82667d9efcdc0ee120b3dd5f74f20994618588"
+EGIT_COMMIT="a8cdb6b627da3a9c4b8ea85a329112484a857cf1"
 SRC_URI=""
 
 RDEPENDS="app-vim/nvim-yarp"
 
 PROPERTIES="live"
-LICENSE="unknown"
+LICENSE="MIT"
 KEYWORDS="~amd64 ~x86 ~arm"
 IUSE=""
 
