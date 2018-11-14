@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_6 )
 
 inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 
@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clang +doc test mono go rust nodejs"
+IUSE="clang +doc test mono go rust nodejs +neovim"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="
@@ -27,6 +27,7 @@ COMMON_DEPEND="
 	        app-vim/rust-vim
 	)
 	nodejs? ( net-libs/nodejs )
+	neovim? ( app-editors/neovim[python] )
 	dev-libs/boost[python,threads,${PYTHON_USEDEP}]
 	|| (
 		app-editors/vim[python,${PYTHON_USEDEP}]
@@ -81,6 +82,7 @@ src_configure() {
 		-DUSE_SYSTEM_LIBCLANG="$(usex clang)"
 		-DUSE_SYSTEM_BOOST=ON
 		-DUSE_SYSTEM_GMOCK=ON
+		-DUSE_PYTHON2=OFF
 	)
 	cmake-utils_src_configure
 }
@@ -102,10 +104,11 @@ src_compile() {
 
 	if use go;
 	then
-		cd "${S}/third_party/ycmd/third_party/gocode" || die "failed cd to gocode"
-		go build || die "failed to go build gocode"
-		cd "${S}/third_party/ycmd/third_party/godef" || die "failed cd to godef"
-		go build || die "failed to go build godef"
+		export GOPATH="$GOPATH:${S}/third_party/ycmd/third_party/go"
+		cd "${S}/third_party/ycmd/third_party/go/src/github.com/mdempsky/gocode" || die "failed cd to gocode"
+		go build || die "failed to go build gocode GOPATH is $GOPATH"
+		cd "${S}/third_party/ycmd/third_party/go/src/github.com/rogpeppe/godef" || die "failed cd to godef"
+		go build || die "failed to go build godef GOPATH is $GOPATH"
 	fi
 
 	if use nodejs;
@@ -161,12 +164,12 @@ src_install() {
 
 	if use go;
 	then
-		cd "${S}/third_party/ycmd/third_party/gocode"
+		cd "${S}/third_party/ycmd/third_party/go/src/github.com/mdempsky/gocode"
 		for f in $(ls -a | tail -n +3 | grep -v '^gocode$')
 		do
 			rm -rf "${f}"
 		done
-		cd "${S}/third_party/ycmd/third_party/godef"
+		cd "${S}/third_party/ycmd/third_party/go/src/github.com/rogpeppe/godef"
 		for f in $(ls -a | tail -n +3 | grep -v '^godef$')
 		do
 			rm -rf "${f}"
@@ -187,9 +190,8 @@ src_install() {
 	use mono || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/OmniSharpServer"
 	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/racerd"
 	use rust || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/rust"
-	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/gocode"
-	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/godef"
 	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/go"
+	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/go"
 	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
 	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
 	find "${D}" -name .gitignore -exec rm -rf {} + || die
