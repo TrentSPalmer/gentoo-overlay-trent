@@ -4,12 +4,14 @@
 EAPI=6
 
 DESCRIPTION="grml's zsh setup"
-HOMEPAGE="https://grml.org/zsh/"
-SRC_URI="https://deb.grml.org/pool/main/g/grml-etc-core/grml-etc-core_${PV}.tar.gz -> ${P}.tar.gz"
+# https://grml.org/zsh/
+HOMEPAGE="https://github.com/grml/grml-etc-core"
+# https://deb.grml.org/pool/main/g/grml-etc-core/grml-etc-core_${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/grml/grml-etc-core/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="amd64 x86 arm"
 IUSE="+doc"
 
 DEPEND="doc? ( app-text/txt2tags )"
