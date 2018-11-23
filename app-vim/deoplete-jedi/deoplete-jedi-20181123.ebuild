@@ -8,7 +8,7 @@ inherit git-r3
 DESCRIPTION="deoplete-jedi"
 HOMEPAGE="https://github.com/zchee/deoplete-jedi"
 EGIT_REPO_URI="https://github.com/zchee/deoplete-jedi.git"
-EGIT_COMMIT="5540e76ee3194f2eaa2df51945297cb847a1dfa8"
+EGIT_COMMIT="9d9796a53ae402e469fa5ea8766102ba40259230"
 SRC_URI=""
 KEYWORDS="~amd64 ~x86 ~arm"
 
