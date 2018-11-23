@@ -3,7 +3,7 @@
 
 EAPI=6
 
-EGIT_REPO_URI="https://github.com/robbyrussell/${PN}.git"
+EGIT_REPO_URI="https://github.com/robbyrussell/oh-my-zsh.git"
 EGIT_COMMIT="05b617066ba5a37ef0c533385efd6e232a387b8f"
 inherit git-r3 readme.gentoo-r1
 
