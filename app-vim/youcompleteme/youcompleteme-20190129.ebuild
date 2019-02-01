@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="ccc06c2c423e7ee7008f7439ff99c604d474cec1"
+EGIT_COMMIT="c25e449f4e72667aca3d18d8bfccd7b289b2e9a1"
 SRC_URI=""
 
 LICENSE="GPL-3"
@@ -66,13 +66,7 @@ src_prepare() {
 	if ! use test ; then
 		sed -i '/^add_subdirectory( tests )/d' third_party/ycmd/cpp/ycm/CMakeLists.txt || die
 	fi
-	for third_party_module in pythonfutures; do
-		rm -r "${S}"/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
-	done
 	# Argparse is included in python 2.7
-	for third_party_module in bottle python-future requests waitress; do
-		rm -r "${S}"/third_party/ycmd/third_party/${third_party_module} || die "Failed to remove third party module ${third_party_module}"
-	done
 	rm -r "${S}"/third_party/ycmd/cpp/BoostParts || die "Failed to remove bundled boost"
 
 }
@@ -184,7 +178,7 @@ src_install() {
 	find python -name *test* -exec rm -rf {} + || die
 	find third_party/ycmd/third_party -name test -exec rm -rf {} + || die
 	egit_clean
-	use clang && (rm third_party/ycmd/libclang.so* || die)
+	use clang && (rm third_party/ycmd/third_party/clang/lib/libclang.so* || die)
 
 	vim-plugin_src_install
 
