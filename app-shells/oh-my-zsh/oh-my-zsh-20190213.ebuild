@@ -4,7 +4,7 @@
 EAPI=6
 
 EGIT_REPO_URI="https://github.com/robbyrussell/oh-my-zsh.git"
-EGIT_COMMIT="851899e59ea71ce8fbae738ec7aeb7a967585977"
+EGIT_COMMIT="965a27aa69b49f4e447bcaae913e71a010f7d141"
 inherit git-r3 readme.gentoo-r1
 
 DESCRIPTION="A ready-to-use zsh configuration with plugins"
