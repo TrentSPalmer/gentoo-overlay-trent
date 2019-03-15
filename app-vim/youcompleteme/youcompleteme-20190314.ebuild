@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="443356132eceb391be0654663917e60cd96c51fc"
+EGIT_COMMIT="1afc081415b75e1762bcd67641341c5bc954d54a"
 SRC_URI=""
 
 LICENSE="GPL-3"
@@ -109,7 +109,7 @@ src_compile() {
 	if use nodejs;
 	then
 		cd "${S}/third_party/ycmd/third_party/tern_runtime" || die "no dir third_party/tern_runtime"
-		npm install --production --python=python2 || die "npm install failed"
+		npm install --production --python=python3 || die "npm install failed"
 	fi
 
 }
