@@ -10,8 +10,17 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="9dee2b4e3f5de5f8b9fdc4790eac35eb2c40257a"
+EGIT_COMMIT="f7e0a6cb7580471d1fc1c68ab85467ff207b5dee"
 SRC_URI=""
+EGIT_SUBMODULES=(
+	'third_party/ycmd'
+	'third_party/OmniSharpServer'
+	'cecil'
+	'NRefactory'
+	'third_party/racerd'
+	'third_party/go/src/github.com/mdempsky/gocode'
+	'third_party/go/src/github.com/rogpeppe/godef'
+	)
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -39,10 +48,15 @@ COMMON_DEPEND="
 RDEPEND="
 	${COMMON_DEPEND}
 	dev-python/bottle[${PYTHON_USEDEP}]
+	dev-python/regex[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/frozendict[${PYTHON_USEDEP}]
+	dev-python/requests-futures[${PYTHON_USEDEP}]
 	dev-python/sh[${PYTHON_USEDEP}]
 	dev-python/waitress[${PYTHON_USEDEP}]
+	dev-python/numpydoc[${PYTHON_USEDEP}]
+	>=dev-python/jedi-0.12.1[${PYTHON_USEDEP}]
+	dev-python/parso[${PYTHON_USEDEP}]
 	virtual/python-futures[${PYTHON_USEDEP}]
 "
 DEPEND="
@@ -173,7 +187,7 @@ src_install() {
 
 	cd "${S}"
 	use doc && dodoc *.md third_party/ycmd/*.md
-	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt ci third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
+	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/examples/samples || die
 	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
 	find third_party/ycmd/third_party -name test -exec rm -rf {} + || die
