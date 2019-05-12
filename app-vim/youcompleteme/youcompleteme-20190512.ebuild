@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="d691404ae2f7c79ec5d053f2c22a4c775b4bf915"
+EGIT_COMMIT="dbcc3b0e14876fd4f39d38dfdef22351f74da3a5"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
@@ -187,7 +187,7 @@ src_install() {
 
 	cd "${S}"
 	use doc && dodoc *.md third_party/ycmd/*.md
-	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt ci third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/ycmd/tests third_party/ycmd/examples/samples || die
+	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/examples/samples || die
 	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
 	find third_party/ycmd/third_party -name test -exec rm -rf {} + || die
