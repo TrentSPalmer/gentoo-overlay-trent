@@ -10,7 +10,7 @@ SRC_URI="https://github.com/jarun/googler/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE=GPL-3
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 arm x86"
 IUSE="+doc"
 
 DEPEND=""
@@ -19,10 +19,9 @@ RDEPEND="dev-lang/python"
 
 DISABLE_AUTOFORMATTING="true"
 DOC_CONTENTS="     ********************************
-All configuration is from the environment, so i.e.
-\`export BROWSER=w3m\` or \`export BROWSER=firefox\`
-in your bashrc or whatever, and also \`googler -h\`
-as well as \`man googler\` do what you expect
+Build your browser into your googler alias, i.e.
+\`alias googler='BROWSER=w3m googler'\`
+also  \`man googler\` do what you expect
 man page requires USE="doc"
 *************************************************"
 
