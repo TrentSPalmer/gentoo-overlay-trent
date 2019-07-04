@@ -8,7 +8,7 @@ inherit git-r3
 DESCRIPTION="deoplete-jedi"
 HOMEPAGE="https://github.com/zchee/deoplete-jedi"
 EGIT_REPO_URI="https://github.com/zchee/deoplete-jedi.git"
-EGIT_COMMIT="f89669d2b089d75f1eccbf8d14277b74857a850d"
+EGIT_COMMIT="763c7befa7bbe44aa00a0c832916958a16e71254"
 SRC_URI=""
 KEYWORDS="~amd64 ~x86 ~arm"
 
@@ -25,11 +25,20 @@ src_compile() {
 }
 
 src_install() {
+	pushd rplugin/python3/deoplete/vendored/jedi
+	ls | grep -v '^jedi$' | xargs rm -rf; popd
+	pushd rplugin/python3/deoplete/vendored/parso
+	ls | grep -v '^parso$' | xargs rm -rf; popd
+	pushd rplugin/python3/deoplete/vendored/jedi/jedi/third_party/typeshed/
+	ls | grep -v '\(^stdlib$\|^third_party$\)' | xargs rm -rf; popd
+
 	insinto /usr/share/vim/vimfiles
 	doins -r rplugin
 	use doc && dodoc README.md
 	find "${D}" -name ".git*" -exec rm -rf {} +
 	find "${D}" -name .travis.yml -exec rm -rf {} +
+	find "${D}" -name .coveragerc -exec rm -rf {} +
+	find "${D}" -name .flake8 -exec rm -rf {} +
 	use doc || find "${D}" -name LICENSE.txt -exec rm -rf {} +
 	use doc || find "${D}" -name README.rst -exec rm -rf {} +
 	use doc || find "${D}" -name AUTHORS.txt -exec rm -rf {} +
