@@ -6,9 +6,9 @@ EAPI=6
 inherit vim-plugin git-r3
 
 EGIT_REPO_URI="https://github.com/itchyny/lightline.vim.git"
-EGIT_COMMIT="80c242c3c5394fd5143b5d7e2741989ba04ae46a"
+EGIT_COMMIT="f2a1f47c85a1341895c20e6dbc3a9440804eec1b"
 SRC_URI=""
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="~amd64 ~arm ~x86"
 PROPERTIES="live"
 
 DESCRIPTION="vim plugin: A light and configurable statusline/tabline"
