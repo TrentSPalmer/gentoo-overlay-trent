@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="04c3505129cd80b92f1b6177dca8aecc55cb0760"
+EGIT_COMMIT="afd69b382844315812fd48912eaa9fa47cba3a8d"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
@@ -20,15 +20,15 @@ EGIT_SUBMODULES=(
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="clang +doc test go nodejs +neovim"
+IUSE="clang +doc test go tern +neovim typescript"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="
 	${PYTHON_DEPS}
 	clang? ( >=sys-devel/clang-7.0:= )
 	go?   ( dev-lang/go )
-	)
-	nodejs? ( net-libs/nodejs )
+	tern? ( net-libs/nodejs )
+	typescript? ( net-libs/nodejs )
 	neovim? ( app-editors/neovim[python] )
 	dev-libs/boost[python,threads,${PYTHON_USEDEP}]
 	|| (
@@ -98,10 +98,14 @@ src_compile() {
 		go build || die "failed to go build gocode GOPATH is $GOPATH"
 	fi
 
-	if use nodejs;
+	if use tern;
 	then
 		cd "${S}/third_party/ycmd/third_party/tern_runtime" || die "no dir third_party/tern_runtime"
 		npm install --production --python=python3 || die "npm install failed"
+	fi
+
+	if use typescript;
+	then
 		mkdir -p "${S}/third_party/ycmd/third_party/tsserver" || die "no dir third_party/tsserver"
 		npm install -g --prefix third_party/tsserver typescript --python=python3
 	fi
@@ -134,8 +138,10 @@ src_install() {
 
 	cd "${S}"
 	use doc && dodoc *.md third_party/ycmd/*.md
-	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/examples/samples || die
-	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
+	# rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt third_party/ycmd/cpp third_party/ycmd/ci third_party/ycmd/examples/samples || die
+	rm -r *.md *.sh *.py* *.ini *.yml COPYING.txt third_party/ycmd/examples/samples || die
+	# rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,.travis.yml,build.*,*.txt,run_tests.*,*.ini,update*} || die
+	rm -r third_party/ycmd/{*.md,*.sh,*.yml,.coveragerc,.gitignore,.gitmodules,build.*,*.txt,run_tests.*,*.ini,update*} || die
 	find python -name *test* -exec rm -rf {} + || die
 	find third_party/ycmd/third_party -name test -exec rm -rf {} + || die
 	egit_clean
@@ -145,8 +151,16 @@ src_install() {
 
 	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/go"
 	use go || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/go"
-	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
-	use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
+	if ! use tern;
+	then
+		if ! use typescript;
+		then
+			rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
+			rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
+		fi
+	fi
+	# use tern || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/third_party/tern_runtime"
+	# use nodejs || rm -rf "${D}/usr/share/vim/vimfiles/third_party/ycmd/ycmd/completers/javascript"
 	find "${D}" -name .gitignore -exec rm -rf {} + || die
 	find "${D}" -name .travis.yml -exec rm -rf {} + || die
 	find "${D}" -name README.rst -exec rm -rf {} + || die
