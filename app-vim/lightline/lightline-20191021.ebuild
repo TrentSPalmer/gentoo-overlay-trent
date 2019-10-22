@@ -6,7 +6,7 @@ EAPI=6
 inherit vim-plugin git-r3
 
 EGIT_REPO_URI="https://github.com/itchyny/lightline.vim.git"
-EGIT_COMMIT="09c61dc3f650eccd2c165c36db8330496321aa50"
+EGIT_COMMIT="d7fd8d7a7465194e8eb67ce759c9fe392035f939"
 SRC_URI=""
 KEYWORDS="~amd64 ~arm ~x86"
 PROPERTIES="live"
