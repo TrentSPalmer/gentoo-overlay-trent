@@ -9,7 +9,7 @@ inherit vim-plugin git-r3
 DESCRIPTION="vim plugin: nvim-yarp"
 HOMEPAGE="https://github.com/roxma/nvim-yarp"
 EGIT_REPO_URI="https://github.com/roxma/nvim-yarp"
-EGIT_COMMIT="1524cf7988d1e1ed7475ead3654987f64943a1f0"
+EGIT_COMMIT="81caad80107abb9c2f5159e02e2cd95876370bec"
 SRC_URI=""
 
 PROPERTIES="live"
