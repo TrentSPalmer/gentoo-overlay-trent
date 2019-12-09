@@ -9,7 +9,7 @@ inherit vim-plugin git-r3
 DESCRIPTION="vim plugin: vim-hug-neovim-rpc"
 HOMEPAGE="https://github.com/roxma/vim-hug-neovim-rpc"
 EGIT_REPO_URI="https://github.com/roxma/vim-hug-neovim-rpc"
-EGIT_COMMIT="9c27d33278d2a24f390fd4caaf11984d28b33358"
+EGIT_COMMIT="701ecbb0a1f904c0b44c6beaafef35e1de998a94"
 SRC_URI=""
 
 RDEPENDS="app-vim/nvim-yarp"
