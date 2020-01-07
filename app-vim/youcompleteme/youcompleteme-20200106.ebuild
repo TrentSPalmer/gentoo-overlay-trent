@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="8099995959e7e533306a2cadd38a2f83d2ea9ed9"
+EGIT_COMMIT="d9a9ce47de8b88100e4230805bf44d394197476d"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
@@ -42,7 +42,6 @@ RDEPEND="
 	dev-python/bottle[${PYTHON_USEDEP}]
 	dev-python/regex[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/frozendict[${PYTHON_USEDEP}]
 	dev-python/requests-futures[${PYTHON_USEDEP}]
 	dev-python/sh[${PYTHON_USEDEP}]
 	dev-python/waitress[${PYTHON_USEDEP}]
