@@ -10,11 +10,11 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="1386c6b3fba94d93576cd344a1cd296c53ad7926"
+EGIT_COMMIT="124661f218e80b96c1f9f3d124e99f9a2fd2d83b"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
-	'third_party/go/src/golang.org/x/tools'
+	'third_party/ycmd/third_party/go/src/golang.org/x/tools'
 	)
 
 LICENSE="GPL-3"
@@ -29,7 +29,10 @@ COMMON_DEPEND="
 	go?   ( dev-lang/go )
 	tern? ( net-libs/nodejs )
 	typescript? ( net-libs/nodejs )
-	neovim? ( app-editors/neovim[python] )
+	neovim? (
+		app-editors/neovim
+		dev-python/neovim-python-client
+	)
 	dev-libs/boost[python,threads,${PYTHON_USEDEP}]
 	|| (
 		app-editors/vim[python,${PYTHON_USEDEP}]
@@ -42,7 +45,6 @@ RDEPEND="
 	dev-python/bottle[${PYTHON_USEDEP}]
 	dev-python/regex[${PYTHON_USEDEP}]
 	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/frozendict[${PYTHON_USEDEP}]
 	dev-python/requests-futures[${PYTHON_USEDEP}]
 	dev-python/sh[${PYTHON_USEDEP}]
 	dev-python/waitress[${PYTHON_USEDEP}]
