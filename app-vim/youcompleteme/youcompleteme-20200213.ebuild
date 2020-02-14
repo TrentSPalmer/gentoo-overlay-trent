@@ -10,11 +10,11 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="9e2ab00bd54cf41787079bcc22e8d67ce9b27ec2"
+EGIT_COMMIT="52632f13ea134a000cbc6a2d1928a37c197ddeee"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
-	'third_party/go/src/golang.org/x/tools'
+	'third_party/ycmd/third_party/go/src/golang.org/x/tools'
 	)
 
 LICENSE="GPL-3"
@@ -29,33 +29,33 @@ COMMON_DEPEND="
 	go?   ( dev-lang/go )
 	tern? ( net-libs/nodejs )
 	typescript? ( net-libs/nodejs )
-	neovim? ( app-editors/neovim[python] )
-	dev-libs/boost[python,threads,${PYTHON_USEDEP}]
+	neovim? (
+		app-editors/neovim
+		dev-python/pynvim
+	)
+	dev-libs/boost[python,threads]
 	|| (
-		app-editors/vim[python,${PYTHON_USEDEP}]
-		app-editors/gvim[python,${PYTHON_USEDEP}]
+		app-editors/vim[python]
+		app-editors/gvim[python]
 	)
 "
 
 RDEPEND="
 	${COMMON_DEPEND}
-	dev-python/bottle[${PYTHON_USEDEP}]
-	dev-python/regex[${PYTHON_USEDEP}]
-	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/frozendict[${PYTHON_USEDEP}]
-	dev-python/requests-futures[${PYTHON_USEDEP}]
-	dev-python/sh[${PYTHON_USEDEP}]
-	dev-python/waitress[${PYTHON_USEDEP}]
-	dev-python/numpydoc[${PYTHON_USEDEP}]
-	>=dev-python/jedi-0.12.1[${PYTHON_USEDEP}]
-	dev-python/parso[${PYTHON_USEDEP}]
-	virtual/python-futures[${PYTHON_USEDEP}]
+	dev-python/bottle
+	dev-python/regex
+	dev-python/requests-futures
+	dev-python/sh
+	dev-python/waitress
+	dev-python/numpydoc
+	>=dev-python/jedi-0.12.1
+	dev-python/parso
 "
 DEPEND="
 	${COMMON_DEPEND}
 	test? (
-		>=dev-python/mock-1.0.1[${PYTHON_USEDEP}]
-		>=dev-python/nose-1.3.0[${PYTHON_USEDEP}]
+		>=dev-python/mock-1.0.1
+		>=dev-python/nose-1.3.0
 		dev-cpp/gmock
 		dev-cpp/gtest
 	)
