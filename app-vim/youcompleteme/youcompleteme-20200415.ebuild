@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="4dda6a71d9df17d8b44c9694bcfcdd55aac5b01d"
+EGIT_COMMIT="7080933e27dba55990beaa4f37282e68f43e2d5e"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
@@ -50,6 +50,9 @@ RDEPEND="
 	dev-python/numpydoc
 	>=dev-python/jedi-0.12.1
 	dev-python/parso
+	dev-python/watchdog
+	dev-python/pathtools
+	dev-python/flask-sphinx-themes
 "
 DEPEND="
 	${COMMON_DEPEND}
@@ -94,7 +97,7 @@ src_compile() {
 	if use go;
 	then
 		# export GOPATH="$GOPATH:${S}/third_party/ycmd/third_party/go"
-		cd "${S}/third_party/ycmd/third_party/go/src/golang.org/x/tools/cmd/gopls" || die "failed cd to gopls"
+		cd "${S}/third_party/ycmd/third_party/go/src/golang.org/x/tools/gopls" || die "failed cd to gopls"
 		go build || die "failed to go build gocode GOPATH is $GOPATH"
 	fi
 
@@ -129,7 +132,7 @@ src_install() {
 
 	if use go;
 	then
-		cd "${S}/third_party/ycmd/third_party/go/src/golang.org/x/tools/cmd/gopls"
+		cd "${S}/third_party/ycmd/third_party/go/src/golang.org/x/tools/gopls"
 		for f in $(ls -a | tail -n +3 | grep -v '^gopls$')
 		do
 			rm -rf "${f}"
