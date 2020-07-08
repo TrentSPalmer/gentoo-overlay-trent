@@ -8,8 +8,9 @@ inherit git-r3
 DESCRIPTION="deoplete-jedi"
 HOMEPAGE="https://github.com/zchee/deoplete-jedi"
 EGIT_REPO_URI="https://github.com/zchee/deoplete-jedi.git"
-EGIT_COMMIT="34e48ef9569536bee335d4e36849e739e31b8aeb"
+EGIT_COMMIT="a0e5a0630206e198380d31804bb6652e56cb3701"
 SRC_URI=""
+EGIT_SUBMODULES=()
 KEYWORDS="~amd64 ~arm ~x86"
 
 PROPERTIES="live"
@@ -18,19 +19,23 @@ SLOT="0"
 IUSE="+doc"
 
 DEPEND=""
-RDEPEND="app-vim/deoplete"
+RDEPEND="
+	app-vim/deoplete
+	dev-python/jedi
+"
 
 src_compile() {
 	true
 }
 
 src_install() {
-	pushd rplugin/python3/deoplete/vendored/jedi
-	ls | grep -v '^jedi$' | xargs rm -rf; popd
-	pushd rplugin/python3/deoplete/vendored/parso
-	ls | grep -v '^parso$' | xargs rm -rf; popd
-	pushd rplugin/python3/deoplete/vendored/jedi/jedi/third_party/typeshed/
-	ls | grep -v '\(^stdlib$\|^third_party$\)' | xargs rm -rf; popd
+	# rm -rf rplugin/python3/deoplete/vendored
+	# pushd rplugin/python3/deoplete/vendored/jedi
+	# ls | grep -v '^jedi$' | xargs rm -rf; popd
+	# pushd rplugin/python3/deoplete/vendored/parso
+	# ls | grep -v '^parso$' | xargs rm -rf; popd
+	# pushd rplugin/python3/deoplete/vendored/jedi/jedi/third_party/typeshed/
+	# ls | grep -v '\(^stdlib$\|^third_party$\)' | xargs rm -rf; popd
 
 	insinto /usr/share/vim/vimfiles
 	doins -r rplugin
