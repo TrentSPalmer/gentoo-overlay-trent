@@ -8,7 +8,7 @@ inherit git-r3
 DESCRIPTION="deoplete-jedi"
 HOMEPAGE="https://github.com/zchee/deoplete-jedi"
 EGIT_REPO_URI="https://github.com/zchee/deoplete-jedi.git"
-EGIT_COMMIT="42f4c24a951b0fb5e76a70e5234f16193a8a746d"
+EGIT_COMMIT="2786058b9022ce6e50db7f75088e69e07185e52c"
 SRC_URI=""
 EGIT_SUBMODULES=()
 KEYWORDS="~amd64 ~arm ~x86"
@@ -29,7 +29,7 @@ src_compile() {
 }
 
 src_install() {
-	rm -rf rplugin/python3/deoplete/vendored
+	# rm -rf rplugin/python3/deoplete/vendored
 	# pushd rplugin/python3/deoplete/vendored/jedi
 	# ls | grep -v '^jedi$' | xargs rm -rf; popd
 	# pushd rplugin/python3/deoplete/vendored/parso
