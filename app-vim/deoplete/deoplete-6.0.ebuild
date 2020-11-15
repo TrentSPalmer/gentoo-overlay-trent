@@ -21,7 +21,10 @@ REQUIRED_USE="
 "
 
 DEPEND=""
+# deoplete 5.2 appears to require that python-msgpack be version < 1.0.0
+# otherwise you wouldn't need to exlicitly include python-msgpack as a dependency
 RDEPEND="
+	dev-python/msgpack
 	vim? (
 	app-editors/vim[python]
 	app-vim/vim-hug-neovim-rpc
