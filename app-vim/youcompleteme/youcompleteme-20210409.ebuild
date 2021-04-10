@@ -50,8 +50,6 @@ RDEPEND="
 	>=dev-python/jedi-0.12.1
 	dev-python/parso
 	dev-python/watchdog
-	dev-python/pathtools
-	dev-python/flask-sphinx-themes
 "
 DEPEND="
 	${COMMON_DEPEND}
