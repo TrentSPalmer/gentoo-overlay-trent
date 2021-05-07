@@ -3,14 +3,14 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{7,8,9} )
+PYTHON_COMPAT=( python3_9 )
 
 inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="a3d02238ca5c19a64ff3336087fe016a4137fde9"
+EGIT_COMMIT="7c4d05375a09a871f618f9688c7af517d4e69b76"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
@@ -43,15 +43,11 @@ RDEPEND="
 	${COMMON_DEPEND}
 	dev-python/bottle
 	dev-python/regex
-	dev-python/requests-futures
 	dev-python/sh
-	dev-python/waitress
 	dev-python/numpydoc
 	>=dev-python/jedi-0.12.1
 	dev-python/parso
 	dev-python/watchdog
-	dev-python/pathtools
-	dev-python/flask-sphinx-themes
 "
 DEPEND="
 	${COMMON_DEPEND}
@@ -74,7 +70,6 @@ src_prepare() {
 	if ! use test ; then
 		sed -i '/^add_subdirectory( tests )/d' third_party/ycmd/cpp/ycm/CMakeLists.txt || die
 	fi
-
 }
 
 src_configure() {
