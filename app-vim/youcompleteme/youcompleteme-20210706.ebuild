@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="ee7f9b646cbb8d86189c5d37397449724f297213"
+EGIT_COMMIT="c83c240e1397291bf1babcba173253d7f753a0b6"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
