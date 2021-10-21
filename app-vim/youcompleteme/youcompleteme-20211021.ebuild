@@ -10,7 +10,7 @@ inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="4117a99861b537830d717c3113e3d584523bc573"
+EGIT_COMMIT="f35a30d4e22783050944c89b666e481d016cd4e1"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
@@ -29,7 +29,7 @@ COMMON_DEPEND="
 	tern? ( net-libs/nodejs )
 	typescript? ( net-libs/nodejs )
 	neovim? (
-		app-editors/neovim
+		>=app-editors/neovim-0.5.0
 		dev-python/pynvim
 	)
 	dev-libs/boost[python,threads]
