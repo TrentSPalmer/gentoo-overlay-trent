@@ -3,14 +3,14 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_9 )
+PYTHON_COMPAT=( python3_10 )
 
 inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
 
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="ab28bd7ac96eb0e16aca0e55208b096f2c06360d"
+EGIT_COMMIT="bdcb798374b4ada441f1042b7f6360fb8d7146d3"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
