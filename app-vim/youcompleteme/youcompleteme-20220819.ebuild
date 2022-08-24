@@ -1,16 +1,16 @@
 # Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_10 )
 
-inherit eutils cmake-utils git-r3 multilib python-single-r1 vim-plugin
+inherit eutils cmake git-r3 multilib python-single-r1 vim-plugin
 
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
 HOMEPAGE="https://github.com/Valloric/YouCompleteMe"
 EGIT_REPO_URI="https://github.com/Valloric/YouCompleteMe"
-EGIT_COMMIT="3ededaed2f9923d50bf3860ba8dace0f7d2724cd"
+EGIT_COMMIT="504ef6a38b4fbad5a02eb64a266ad219a0fb1da9"
 SRC_URI=""
 EGIT_SUBMODULES=(
 	'third_party/ycmd'
